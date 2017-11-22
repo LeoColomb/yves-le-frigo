@@ -1,6 +1,6 @@
 'use strict'
 
-import { app, BrowserWindow } from 'electron'
+import { app, screen, BrowserWindow } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -11,6 +11,7 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow
+let remoteWindow
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
@@ -19,16 +20,40 @@ function createWindow () {
   /**
    * Initial window options
    */
+  let displays = screen.getAllDisplays()
+  let externalDisplay = displays.find((display) =>
+    display.bounds.x !== 0 || display.bounds.y !== 0
+  )
+
+  if (externalDisplay) {
+    remoteWindow = new BrowserWindow({
+      x: externalDisplay.bounds.x,
+      y: externalDisplay.bounds.y,
+      frame: false,
+      fullscreen: true,
+      movable: false,
+      resizable: false,
+      minimizable: false,
+      alwaysOnTop: process.env.NODE_ENV !== 'development'
+    })
+    remoteWindow.loadURL('https://github.com')
+  }
+
   mainWindow = new BrowserWindow({
     height: 563,
     useContentSize: true,
-    width: 1000
+    width: 1000,
+    frame: false,
+    modal: true,
+    parent: remoteWindow
   })
 
   mainWindow.loadURL(winURL)
 
   mainWindow.on('closed', () => {
     mainWindow = null
+    remoteWindow.close()
+    remoteWindow = null
   })
 }
 

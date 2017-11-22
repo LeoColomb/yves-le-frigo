@@ -26,6 +26,14 @@
         <div class="name">Platform:</div>
         <div class="value">{{ platform }}</div>
       </div>
+      <div class="item">
+        <div class="name">Screens:</div>
+        <div class="value">{{ screens.length }}</div>
+      </div>
+      <div v-for="screen in screens" class="item">
+        <div class="name">Screen {{ screen.id }}:</div>
+        <div class="value">{{ screen.size.width }} x {{ screen.size.height }}</div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,7 +47,8 @@
         node: process.versions.node,
         path: '/',
         platform: require('os').platform(),
-        vue: require('vue/package.json').version
+        vue: require('vue/package.json').version,
+        screens: this.$electron.screen.getAllDisplays()
       }
     }
   }

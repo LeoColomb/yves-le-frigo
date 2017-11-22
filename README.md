@@ -1,6 +1,8 @@
-# yves-le-frigo
+# Yves le frigo
 
-> Yves le frigo, le film
+> Yves le frigo, le film et l'interface
+
+[![Build Status](https://travis-ci.com/LeoColomb/yves-le-frigo.svg?token=2zEzd31MyLpyoYEtPyFg&branch=master)](https://travis-ci.com/LeoColomb/yves-le-frigo)
 
 #### Build Setup
 
@@ -22,7 +24,3 @@ npm test
 npm run lint
 
 ```
-
----
-
-This project was generated with [electron-vue](https://github.com/SimulatedGREG/electron-vue)@[142eea4](https://github.com/SimulatedGREG/electron-vue/tree/142eea44aa50fdead91a469daedfcff04308c3fc) using [vue-cli](https://github.com/vuejs/vue-cli). Documentation about the original structure can be found [here](https://simulatedgreg.gitbooks.io/electron-vue/content/index.html).

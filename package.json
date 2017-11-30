@@ -79,7 +79,7 @@
     "electron": "^1.7.5",
     "electron-debug": "^1.4.0",
     "electron-devtools-installer": "^2.2.0",
-    "electron-builder": "^19.46.9",
+    "electron-builder": "^19.47.1",
     "babel-eslint": "^8.0.2",
     "eslint": "^4.12.1",
     "eslint-friendly-formatter": "^3.0.0",

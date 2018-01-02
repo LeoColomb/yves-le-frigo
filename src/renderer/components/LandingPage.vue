@@ -61,8 +61,9 @@
   }
 
   main > button {
-    flex-basis: 18%;
-    max-width: 18%;
+    flex-grow: 1;
+    min-width: 10em;
     margin-bottom: 1em;
+    margin-right: 1em;
   }
 </style>

@@ -56,6 +56,7 @@
     }
   },
   "dependencies": {
+    "buefy": "^0.6.2",
     "vue": "^2.5.13",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1",

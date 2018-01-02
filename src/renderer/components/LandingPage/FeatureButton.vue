@@ -29,7 +29,7 @@
 
     data () {
       return {
-        imageUrl: `static/features/${this.feature}.png`
+        imageUrl: `static/home/${this.feature}.png`
       }
     }
   }

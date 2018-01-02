@@ -3,20 +3,20 @@
     <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
     <main>
       <feature-button feature="visu" color="info" full-name="Voix normale"/>
-      <feature-button feature="visu" color="danger" full-name="Voix peur"/>
-      <feature-button feature="visu" color="primary" full-name="Voix douce"/>
-      <feature-button feature="visu" color="warning" full-name="Voix Julien Lepers"/>
-      <feature-button feature="visu" color="success" full-name="Voix émotion"/>
-      <feature-button feature="visu-chant" color="link" full-name="Voix chantée"/>
+      <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
+      <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce"/>
+      <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>
+      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
+      <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
 
-      <feature-button feature="anim-gateau" color="black" full-name="Gâteau"/>
-      <feature-button feature="anim-3d" color="black" full-name="Femme en 3D"/>
-      <feature-button feature="anim-cravate" color="black" full-name="Cravate"/>
-      <feature-button feature="anim-produit" color="black" full-name="Produits"/>
-      <feature-button feature="anim-echecs" color="black" full-name="Voix normale"/>
-      <feature-button feature="anim-echecs" color="black" full-name="Jeu d'échecs"/>
+      <feature-button feature="anim" modifier="gateau" color="black" full-name="Gâteau"/>
+      <feature-button feature="anim" modifier="3d" color="black" full-name="Femme en 3D"/>
+      <feature-button feature="anim" modifier="cravate" color="black" full-name="Cravate"/>
+      <feature-button feature="anim" modifier="produit" color="black" full-name="Produits"/>
+      <feature-button feature="anim" modifier="battery" color="dark" full-name="Batterie faible"/>
 
-      <feature-button feature="battery" color="dark" full-name="Batterie faible"/>
+      <feature-button feature="video" modifier="camera" color="black" full-name="Caméra"/>
+      <feature-button feature="video" modifier="echecs" color="black" full-name="Jeu d'échecs"/>
     </main>
   </div>
 </template>
@@ -26,23 +26,12 @@
 
   export default {
     name: 'landing-page',
-    components: { FeatureButton },
-    methods: {
-      open (link) {
-        this.$electron.remote.getCurrentWindow().getParentWindow().loadURL(link)
-      }
-    }
+    components: { FeatureButton }
   }
 </script>
 
 <style>
   #wrapper {
-    background:
-      radial-gradient(
-        ellipse at top left,
-        rgba(255, 255, 255, 1) 40%,
-        rgba(229, 229, 229, .9) 100%
-      );
     height: 100vh;
     padding: 3em 3em;
     width: 100vw;

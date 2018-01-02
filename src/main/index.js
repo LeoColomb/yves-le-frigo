@@ -36,15 +36,17 @@ function createWindow () {
       minimizable: false,
       alwaysOnTop: process.env.NODE_ENV !== 'development'
     })
-    remoteWindow.loadURL('https://github.com')
+    remoteWindow.loadURL(`${winURL}#/features`)
   }
 
   mainWindow = new BrowserWindow({
     height: 600,
     useContentSize: true,
     width: 1200,
-    frame: false,
+    frame: true,
     modal: true,
+    minimizable: false,
+    autoHideMenuBar: true,
     parent: remoteWindow
   })
 

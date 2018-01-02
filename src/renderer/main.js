@@ -17,4 +17,8 @@ new Vue({
   router,
   store,
   template: '<App/>'
-}).$mount('#app')
+})
+  .$mount('#app')
+  .$electron.ipcRenderer.on('send-feature', (event, feature) => {
+    store.commit('FEATURE_CHANGE', feature)
+  })

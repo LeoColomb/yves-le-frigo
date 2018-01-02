@@ -1,5 +1,7 @@
 <template>
-  <button :class="`button is-medium is-${color}`">
+  <button
+    :class="`button is-medium is-${color}`"
+    @click="open">
     <span>
       <img :src="imageUrl">
     </span>
@@ -11,10 +13,21 @@
   export default {
     name: 'feature-button',
 
+    data () {
+      return {
+        imageUrl: `static/home/${this.feature}-${this.modifier ? this.modifier : 'base'}.png`
+      }
+    },
+
     props: {
       feature: {
         type: String,
         required: true
+      },
+      modifier: {
+        type: String,
+        required: false,
+        default: null
       },
       color: {
         type: String,
@@ -24,12 +37,14 @@
         type: String,
         required: true
       }
-
     },
 
-    data () {
-      return {
-        imageUrl: `static/home/${this.feature}.png`
+    methods: {
+      open () {
+        this.$electron.remote.getCurrentWindow().getParentWindow().webContents.send('send-feature', {
+          feature: this.feature,
+          modifier: this.modifier
+        })
       }
     }
   }

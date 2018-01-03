@@ -8,13 +8,15 @@
   import InitFeature from './FeaturesPage/InitFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
   import AnimFeature from './FeaturesPage/AnimFeature'
+  import VideoFeature from './FeaturesPage/VideoFeature'
 
   export default {
     name: 'features-page',
     components: {
       InitFeature,
       VisuFeature,
-      AnimFeature
+      AnimFeature,
+      VideoFeature
     },
 
     computed: mapState({

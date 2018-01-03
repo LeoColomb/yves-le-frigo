@@ -12,8 +12,13 @@ const mutations = {
 
 const actions = {}
 
+const getters = {
+  getModifierState: state => state.modifier
+}
+
 export default {
   state,
   mutations,
-  actions
+  actions,
+  getters
 }

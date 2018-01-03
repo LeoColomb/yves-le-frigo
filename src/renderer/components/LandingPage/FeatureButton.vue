@@ -61,14 +61,15 @@
     text-wrap: normal;
   }
 
-  /*button > span {
-    width: 100%;
-  }*/
+  button span {
+    cursor: pointer;
+  }
 
   button img {
     max-width: 60%;
     max-height: 4em;
     margin-top: 0.5em;
     margin-bottom: 0.2em;
+    cursor: pointer;
   }
 </style>

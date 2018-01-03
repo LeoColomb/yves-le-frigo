@@ -23,7 +23,7 @@
 
     mounted: function () {
       this.watcher = this.$store.watch(
-        () => { return this.getModifierState },
+        () => this.getModifierState,
         () => { document.getElementById('video-element').load() }
       )
     },

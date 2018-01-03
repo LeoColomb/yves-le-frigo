@@ -78,7 +78,7 @@
     "del": "^3.0.0",
     "devtron": "^1.4.0",
     "electron": "^1.7.10",
-    "electron-debug": "^1.4.0",
+    "electron-debug": "^1.5.0",
     "electron-devtools-installer": "^2.2.3",
     "electron-builder": "^19.50.0",
     "babel-eslint": "^8.1.2",

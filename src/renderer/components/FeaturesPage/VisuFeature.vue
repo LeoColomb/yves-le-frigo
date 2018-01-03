@@ -47,7 +47,14 @@
         this.audio.src = `static/features/visu/${this.modifier}.mp3`
         source = this.context.createMediaElementSource(this.audio)
       } else {
-        this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        try {
+          this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        } catch (e) {
+          this.resizeCanvas()
+          this.ctx.font = '35px sans-serif'
+          this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
+          return
+        }
         source = this.context.createMediaStreamSource(this.audio)
       }
 

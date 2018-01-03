@@ -1,6 +1,9 @@
 <template>
   <div id="wrapper">
-    <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+    <header>
+      <img id="logo" src="~@/assets/logo.png" alt="electron-vue">
+      <p class="tag is-danger">Version test 0.1.1</p>
+    </header>
     <main>
       <feature-button feature="visu" color="info" full-name="Voix normale"/>
       <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
@@ -37,10 +40,16 @@
     width: 100vw;
   }
 
-  #logo {
-    height: auto;
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 20px;
-    width: 200px;
+    padding-right: 1em;
+  }
+
+  header > img {
+    height: 3em;
   }
 
   main {

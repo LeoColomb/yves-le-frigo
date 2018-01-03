@@ -1,9 +1,10 @@
 {
   "name": "yves-le-frigo",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "Léo Colombaro <git@colombaro.fr>",
   "description": "Yves le frigo, le film",
   "license": "proprietary",
+  "repository": "https://github.com/LeoColomb/yves-le-frigo",
   "main": "./dist/electron/main.js",
   "scripts": {
     "build": "node .electron-vue/build.js && electron-builder",

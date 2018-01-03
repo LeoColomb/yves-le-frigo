@@ -72,7 +72,7 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
+require('electron-debug')({ showDevTools: true })
 /**
  * Auto Updater
  *

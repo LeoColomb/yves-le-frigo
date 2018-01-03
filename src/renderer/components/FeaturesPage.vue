@@ -21,7 +21,13 @@
 
     computed: mapState({
       feature: state => `${state.feature.current}-feature`
-    })
+    }),
+
+    mounted: function () {
+      this.$electron.ipcRenderer.on('send-feature', (event, feature) => {
+        this.$store.commit('FEATURE_CHANGE', feature)
+      })
+    }
   }
 </script>
 

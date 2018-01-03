@@ -16,14 +16,20 @@
       ...mapState({
         modifier: state => state.feature.modifier
       }),
-      ...mapGetters('feature', [
+      ...mapGetters([
         'getModifierState'
       ])
     },
 
-    mounted: () => {
-      const video = document.getElementById('video-element')
-      this.$store.watch(this.getModifierState, () => video.load())
+    mounted: function () {
+      this.watcher = this.$store.watch(
+        () => { return this.getModifierState },
+        () => { document.getElementById('video-element').load() }
+      )
+    },
+
+    beforeDestroy: function () {
+      this.watcher()
     }
   }
 </script>

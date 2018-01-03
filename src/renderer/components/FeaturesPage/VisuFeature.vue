@@ -14,43 +14,46 @@
    * @author Léo Colombaro
    * @licence ISC
    */
-  let rads, centerX, centerY, radiusOld, barX, barY, barXTerm, barYTerm, barW, barH
-  let bars = 200
-  let reactX = 0
-  let reactY = 0
-  let radius = 0
-  let deltarad = 0
-  let shockwave = 0
-  let rot = 0
-  let intensity = 0
+  let rads, centerX, centerY, radius, radiusOld, deltarad, shockwave,
+    bars, barX, barY, barXTerm, barYTerm, barW, barH, reactX, reactY,
+    intensity, rot
 
   export default {
     name: 'visu-feature',
 
     mounted: async function () {
+      bars = 200
+      reactX = 0
+      reactY = 0
+      radius = 0
+      deltarad = 0
+      shockwave = 0
+      rot = 0
+      intensity = 0
+
       this.canvas = document.getElementById('visualizer_render')
       this.ctx = this.canvas.getContext('2d')
 
       // resizeCanvas();
 
-      const context = new AudioContext()
-      this.analyser = context.createAnalyser()
+      this.context = new AudioContext()
+      this.analyser = this.context.createAnalyser()
       let source
 
       if (this.modifier) {
-        const audio = new Audio()
-        audio.loop = false
-        audio.autoplay = true
-        audio.src = `static/features/visu/${this.modifier}.mp3`
-        source = context.createMediaElementSource(audio)
+        this.audio = new Audio()
+        this.audio.loop = false
+        this.audio.autoplay = true
+        this.audio.src = `static/features/visu/${this.modifier}.mp3`
+        source = this.context.createMediaElementSource(this.audio)
       } else {
-        const stream = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-        source = context.createMediaStreamSource(stream)
+        this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        source = this.context.createMediaStreamSource(this.audio)
       }
 
       // route audio playback
       source.connect(this.analyser)
-      this.analyser.connect(context.destination)
+      this.analyser.connect(this.context.destination)
 
       this.fbcArray = new Uint8Array(this.analyser.frequencyBinCount)
 
@@ -59,6 +62,14 @@
 
     beforeDestroy: function () {
       window.cancelAnimationFrame(this.frameRequestId)
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+      this.context.close()
+      if (this.modifier) {
+        this.audio.pause()
+        this.audio.src = null
+      } else {
+        this.audio.getTracks().forEach(stream => stream.stop())
+      }
     },
 
     methods: {

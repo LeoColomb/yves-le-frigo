@@ -25,19 +25,17 @@ function createWindow () {
     display.bounds.x !== 0 || display.bounds.y !== 0
   )
 
-  if (externalDisplay) {
-    remoteWindow = new BrowserWindow({
-      x: externalDisplay.bounds.x,
-      y: externalDisplay.bounds.y,
-      frame: false,
-      fullscreen: true,
-      movable: false,
-      resizable: false,
-      minimizable: false,
-      alwaysOnTop: process.env.NODE_ENV !== 'development'
-    })
-    remoteWindow.loadURL(`${winURL}#/features`)
-  }
+  remoteWindow = new BrowserWindow({
+    x: externalDisplay ? externalDisplay.bounds.x : 0,
+    y: externalDisplay ? externalDisplay.bounds.y : 0,
+    frame: false,
+    fullscreen: true,
+    movable: false,
+    resizable: false,
+    minimizable: false,
+    alwaysOnTop: process.env.NODE_ENV !== 'development' && externalDisplay
+  })
+  remoteWindow.loadURL(`${winURL}#/features`)
 
   mainWindow = new BrowserWindow({
     height: 600,
@@ -72,7 +70,7 @@ app.on('activate', () => {
     createWindow()
   }
 })
-require('electron-debug')({ showDevTools: true })
+
 /**
  * Auto Updater
  *

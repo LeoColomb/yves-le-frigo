@@ -51,7 +51,8 @@
           this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
         } catch (e) {
           this.resizeCanvas()
-          this.ctx.font = '35px sans-serif white'
+          this.ctx.font = '35px sans-serif'
+          this.ctx.fillStyle = 'white'
           this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
           return
         }

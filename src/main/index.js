@@ -38,9 +38,9 @@ function createWindow () {
   remoteWindow.loadURL(`${winURL}#/features`)
 
   mainWindow = new BrowserWindow({
-    height: 600,
+    height: 700,
     useContentSize: true,
-    width: 1200,
+    width: 1210,
     frame: true,
     modal: true,
     minimizable: false,

@@ -15,6 +15,7 @@
     width: 100%;
     height: 100vh;
     padding: 3em;
+    background: white;
   }
   .border {
     width: 100%;

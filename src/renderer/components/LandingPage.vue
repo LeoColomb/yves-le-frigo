@@ -22,7 +22,7 @@
       <feature-button feature="voix" modifier="" color="black" full-name="Choix de voix"/>
 
       <feature-button feature="anim" modifier="gateau" color="black" full-name="Gâteau"/>
-      <feature-button feature="anim" modifier="3d" color="black" full-name="Femme en 3D"/>
+      <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="anim" modifier="cravate" color="black" full-name="Cravate"/>
       <feature-button feature="anim" modifier="produit" color="black" full-name="Produits"/>
 

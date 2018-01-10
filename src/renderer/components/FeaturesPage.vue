@@ -9,6 +9,7 @@
   import VisuFeature from './FeaturesPage/VisuFeature'
   import AnimFeature from './FeaturesPage/AnimFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
+  import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
   export default {
     name: 'features-page',
@@ -16,7 +17,8 @@
       InitFeature,
       VisuFeature,
       AnimFeature,
-      VideoFeature
+      VideoFeature,
+      FullscreenFeature
     },
 
     computed: mapState({

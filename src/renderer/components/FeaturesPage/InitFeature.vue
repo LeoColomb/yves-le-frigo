@@ -1,12 +1,18 @@
 <template>
-  <div class="cont">
+  <div :class="`cont ${this.modifier}`">
     <div class="border"></div>
   </div>
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
-    name: 'init-feature'
+    name: 'init-feature',
+
+    computed: mapState({
+      modifier: state => state.feature.modifier
+    })
   }
 </script>
 
@@ -17,6 +23,11 @@
     padding: 3em;
     background: white;
   }
+
+  .cont.black {
+    background: black;
+  }
+
   .border {
     width: 100%;
     height: 100%;

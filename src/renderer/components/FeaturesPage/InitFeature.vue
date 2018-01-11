@@ -1,5 +1,5 @@
 <template>
-  <div :class="`cont ${this.modifier}`">
+  <div class="cont">
     <div class="border"></div>
   </div>
 </template>
@@ -22,10 +22,6 @@
     height: 100vh;
     padding: 3em;
     background: white;
-  }
-
-  .cont.black {
-    background: black;
   }
 
   .border {

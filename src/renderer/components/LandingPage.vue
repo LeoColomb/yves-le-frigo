@@ -6,11 +6,11 @@
     </header>
     <main>
       <feature-button feature="visu" modifier="" color="info" full-name="Voix normale"/>
-      <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur" disabled/>
-      <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce" disabled/>
-      <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers" disabled/>
-      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion" disabled/>
-      <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée" disabled/>
+      <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
+      <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce"/>
+      <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>
+      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
+      <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
 
       <feature-button feature="veille" modifier="" color="dark" full-name="Veille" disabled/>
       <feature-button feature="veille" modifier="sortie" color="dark" full-name="Sortie de veille" disabled/>

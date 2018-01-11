@@ -112,13 +112,6 @@
       frameLooper: function () {
         this.resizeCanvas()
 
-        const grd = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height)
-        grd.addColorStop(0, 'rgba(180, 140, 230, 1)')
-        grd.addColorStop(1, 'rgba(102, 102, 255, 1)')
-
-        this.ctx.fillStyle = grd
-        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-
         this.ctx.fillStyle = `rgba(255, 255, 255, ${this.intensity * 0.0000125 - 0.4})`
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
@@ -143,7 +136,7 @@
 
           // this.ctx.save()
 
-          this.ctx.strokeStyle = `rgb(${(this.fbcArray[i]).toString()}, 255, 255)`
+          this.ctx.strokeStyle = `rgb(${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()})`
           this.ctx.lineWidth = this.barW
           this.ctx.beginPath()
           this.ctx.moveTo(this.barX, this.barY)
@@ -191,5 +184,7 @@
 </script>
 
 <style scoped>
-
+  canvas {
+    background: transparent;
+  }
 </style>

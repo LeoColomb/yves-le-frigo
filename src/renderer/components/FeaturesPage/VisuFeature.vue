@@ -31,8 +31,6 @@
     mounted: async function () {
       this.canvas = document.getElementById('visualizer_render')
       this.ctx = this.canvas.getContext('2d')
-      this.context = new AudioContext()
-      this.analyser = this.context.createAnalyser()
 
       await this.constructer()
 
@@ -61,6 +59,9 @@
         this.shockwave = 0
         this.rot = 0
         this.intensity = 0
+
+        this.context = new AudioContext()
+        this.analyser = this.context.createAnalyser()
 
         if (this.modifier) {
           this.audio = new Audio()

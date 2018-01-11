@@ -72,4 +72,9 @@
     margin-bottom: 0.2em;
     cursor: pointer;
   }
+
+  button:disabled span,
+  button:disabled img {
+    cursor: not-allowed;
+  }
 </style>

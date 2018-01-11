@@ -37,16 +37,17 @@
 
 <script>
   import FeatureButton from './LandingPage/FeatureButton'
-  import { version } from '../../../package'
 
   export default {
     name: 'landing-page',
+
     components: { FeatureButton },
 
     mounted: function () {
+      const version = this.$electron.remote.app.getVersion()
       const el = document.getElementById('ver')
       el.innerText = version
-      if ((version.split('.')[2]) > 0) {
+      if (Number(version.split('.')[2]) > 0 || Number(version.split('.')[0]) === 0) {
         el.style.display = 'inherit'
       }
     }

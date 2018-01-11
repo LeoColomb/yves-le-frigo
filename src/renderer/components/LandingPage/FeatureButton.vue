@@ -15,7 +15,7 @@
 
     data () {
       return {
-        imageUrl: `static/home/${this.feature}-${this.modifier ? this.modifier : 'base'}.png`
+        imageUrl: `static/home/${this.modifier ? this.modifier : this.feature}.png`
       }
     },
 

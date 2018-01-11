@@ -6,30 +6,31 @@
     </header>
     <main>
       <feature-button feature="visu" modifier="" color="info" full-name="Voix normale"/>
-      <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
-      <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce"/>
-      <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>
-      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
-      <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
+      <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur" disabled/>
+      <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce" disabled/>
+      <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers" disabled/>
+      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion" disabled/>
+      <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée" disabled/>
 
-      <feature-button feature="veille" modifier="" color="dark" full-name="Veille"/>
-      <feature-button feature="veille" modifier="sortie" color="dark" full-name="Sortie de veille"/>
-      <feature-button feature="veille" modifier="agitee" color="dark" full-name="Veille agitée"/>
-      <feature-button feature="veille" modifier="degivre" color="dark" full-name="Veille dégivrante"/>
+      <feature-button feature="veille" modifier="" color="dark" full-name="Veille" disabled/>
+      <feature-button feature="veille" modifier="sortie" color="dark" full-name="Sortie de veille" disabled/>
+      <feature-button feature="veille" modifier="agitee" color="dark" full-name="Veille agitée" disabled/>
+      <feature-button feature="veille" modifier="degivre" color="dark" full-name="Veille dégivrante" disabled/>
 
       <feature-button feature="visu" modifier="file" color="black" full-name="Lecture"/>
-      <feature-button feature="visu" modifier="crea" color="black" full-name="Création"/>
-      <feature-button feature="voix" modifier="" color="black" full-name="Choix de voix"/>
+      <feature-button feature="visu" modifier="crea" color="black" full-name="Création" disabled/>
 
-      <feature-button feature="anim" modifier="gateau" color="black" full-name="Gâteau"/>
+      <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
+      <feature-button feature="video" modifier="gateau" color="black" full-name="Gâteau" disabled/>
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
-      <feature-button feature="anim" modifier="cravate" color="black" full-name="Cravate"/>
-      <feature-button feature="anim" modifier="produit" color="black" full-name="Produits"/>
-
+      <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
+      <feature-button feature="video" modifier="produits" color="black" full-name="Produits"/>
       <feature-button feature="video" modifier="camera" color="black" full-name="Caméra"/>
       <feature-button feature="video" modifier="echecs" color="black" full-name="Jeu d'échecs"/>
+      <feature-button feature="video" modifier="battery" color="dark" full-name="Batterie faible"/>
+      <feature-button feature="video" modifier="loader" color="dark" full-name="Chargement"/>
 
-      <feature-button feature="anim" modifier="battery" color="dark" full-name="Batterie faible"/>
+      <feature-button feature="init" modifier="black" color="black" full-name="Eteint"/>
     </main>
   </div>
 </template>

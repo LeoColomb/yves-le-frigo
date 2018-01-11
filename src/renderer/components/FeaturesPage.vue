@@ -7,7 +7,6 @@
 
   import InitFeature from './FeaturesPage/InitFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
-  import AnimFeature from './FeaturesPage/AnimFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
   import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
@@ -16,7 +15,6 @@
     components: {
       InitFeature,
       VisuFeature,
-      AnimFeature,
       VideoFeature,
       FullscreenFeature
     },

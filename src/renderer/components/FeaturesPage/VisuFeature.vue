@@ -3,6 +3,8 @@
 </template>
 
 <script>
+  import { mapState, mapGetters } from 'vuex'
+
   /**
    * Canvas audio animation
    *
@@ -14,80 +16,100 @@
    * @author Léo Colombaro
    * @licence ISC
    */
-  let rads, centerX, centerY, radius, radiusOld, deltarad, shockwave,
-    bars, barX, barY, barXTerm, barYTerm, barW, barH, reactX, reactY,
-    intensity, rot
-
   export default {
     name: 'visu-feature',
 
-    mounted: async function () {
-      bars = 200
-      reactX = 0
-      reactY = 0
-      radius = 0
-      deltarad = 0
-      shockwave = 0
-      rot = 0
-      intensity = 0
+    computed: {
+      ...mapState({
+        modifier: state => state.feature.modifier
+      }),
+      ...mapGetters([
+        'getModifierState'
+      ])
+    },
 
+    mounted: async function () {
       this.canvas = document.getElementById('visualizer_render')
       this.ctx = this.canvas.getContext('2d')
-
-      // resizeCanvas();
-
       this.context = new AudioContext()
       this.analyser = this.context.createAnalyser()
-      let source
 
-      if (this.modifier) {
-        this.audio = new Audio()
-        this.audio.loop = false
-        this.audio.autoplay = true
-        this.audio.src = `static/features/visu/${this.modifier}.mp3`
-        source = this.context.createMediaElementSource(this.audio)
-      } else {
-        try {
-          this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-        } catch (e) {
-          this.resizeCanvas()
-          this.ctx.font = '35px sans-serif'
-          this.ctx.fillStyle = 'white'
-          this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
-          return
+      await this.constructer()
+
+      this.watcher = this.$store.watch(
+        () => this.getModifierState,
+        () => {
+          this.destroyer()
+          this.constructer()
         }
-        source = this.context.createMediaStreamSource(this.audio)
-      }
-
-      // route audio playback
-      source.connect(this.analyser)
-      this.analyser.connect(this.context.destination)
-
-      this.fbcArray = new Uint8Array(this.analyser.frequencyBinCount)
-
-      this.frameRequestId = this.frameLooper()
+      )
     },
 
     beforeDestroy: function () {
-      window.cancelAnimationFrame(this.frameRequestId)
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
-      this.context.close()
-      if (this.modifier) {
-        this.audio.pause()
-        this.audio.src = null
-      } else {
-        this.audio.getTracks().forEach(stream => stream.stop())
-      }
+      this.watcher()
+      this.destroyer()
     },
 
     methods: {
+      constructer: async function () {
+        this.bars = 200
+        this.reactX = 0
+        this.reactY = 0
+        this.radius = 0
+        this.radiusOld = 0
+        this.deltarad = 0
+        this.shockwave = 0
+        this.rot = 0
+        this.intensity = 0
+
+        if (this.modifier) {
+          this.audio = new Audio()
+          this.audio.loop = false
+          this.audio.autoplay = true
+          // this.audio.src = `static/features/visu/${this.modifier}.mp3`
+          this.audio.src = `static/features/visu/2.mp3`
+          this.source = this.context.createMediaElementSource(this.audio)
+        } else {
+          try {
+            this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+          } catch (e) {
+            this.resizeCanvas()
+            this.ctx.font = '35px sans-serif'
+            this.ctx.fillStyle = 'white'
+            this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
+            return
+          }
+          this.source = this.context.createMediaStreamSource(this.audio)
+        }
+
+        // route audio playback
+        this.source.connect(this.analyser)
+        this.analyser.connect(this.context.destination)
+
+        this.fbcArray = new Uint8Array(this.analyser.frequencyBinCount)
+
+        this.frameRequestId = this.frameLooper()
+      },
+
+      destroyer: function () {
+        window.cancelAnimationFrame(this.frameRequestId)
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
+        this.context.close()
+        if (this.audio.src) {
+          this.audio.pause()
+          this.audio.src = null
+        } else {
+          this.audio.getTracks().forEach(stream => stream.stop())
+        }
+      },
+
       resizeCanvas: function () {
         this.canvas.width = window.innerWidth
         this.canvas.height = window.innerHeight
       },
 
       frameLooper: function () {
-        this.resizeCanvas() // for some reason i have to resize the canvas every update or else the framerate decreases over time
+        this.resizeCanvas()
 
         const grd = this.ctx.createLinearGradient(0, 0, 0, this.canvas.height)
         grd.addColorStop(0, 'rgba(180, 140, 230, 1)')
@@ -96,69 +118,69 @@
         this.ctx.fillStyle = grd
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-        this.ctx.fillStyle = `rgba(255, 255, 255, ${intensity * 0.0000125 - 0.4})`
+        this.ctx.fillStyle = `rgba(255, 255, 255, ${this.intensity * 0.0000125 - 0.4})`
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
-        rot = rot + intensity * 0.0000001
-        reactX = 0
-        reactY = 0
-        intensity = 0
+        this.rot = this.rot + this.intensity * 0.0000001
+        this.reactX = 0
+        this.reactY = 0
+        this.intensity = 0
 
         this.analyser.getByteFrequencyData(this.fbcArray)
 
-        for (let i = 0; i < bars; i++) {
-          rads = Math.PI * 2 / bars
+        for (let i = 0; i < this.bars; i++) {
+          this.rads = Math.PI * 2 / this.bars
 
-          barX = centerX
-          barY = centerY
+          this.barX = this.centerX
+          this.barY = this.centerY
 
-          barH = Math.min(99999, Math.max((this.fbcArray[i] * 2.5 - 200), 0))
-          barW = barH * 0.02
+          this.barH = Math.min(99999, Math.max((this.fbcArray[i] * 2.5 - 200), 0))
+          this.barW = this.barH * 0.02
 
-          barXTerm = centerX + Math.cos(rads * i + rot) * (radius + barH)
-          barYTerm = centerY + Math.sin(rads * i + rot) * (radius + barH)
+          this.barXTerm = this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH)
+          this.barYTerm = this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH)
 
-          this.ctx.save()
+          // this.ctx.save()
 
           this.ctx.strokeStyle = `rgb(${(this.fbcArray[i]).toString()}, 255, 255)`
-          this.ctx.lineWidth = barW
+          this.ctx.lineWidth = this.barW
           this.ctx.beginPath()
-          this.ctx.moveTo(barX, barY)
-          this.ctx.lineTo(barXTerm, barYTerm)
+          this.ctx.moveTo(this.barX, this.barY)
+          this.ctx.lineTo(this.barXTerm, this.barYTerm)
           this.ctx.stroke()
 
-          reactX += Math.cos(rads * i + rot) * (radius + barH)
-          reactY += Math.sin(rads * i + rot) * (radius + barH)
+          this.reactX += Math.cos(this.rads * i + this.rot) * (this.radius + this.barH)
+          this.reactY += Math.sin(this.rads * i + this.rot) * (this.radius + this.barH)
 
-          intensity += barH
+          this.intensity += this.barH
         }
 
-        centerX = this.canvas.width / 2 - (reactX * 0.007)
-        centerY = this.canvas.height / 2 - (reactY * 0.007)
+        this.centerX = this.canvas.width / 2 - (this.reactX * 0.007)
+        this.centerY = this.canvas.height / 2 - (this.reactY * 0.007)
 
-        radiusOld = radius
-        radius = 25 + (intensity * 0.002)
-        deltarad = radius - radiusOld
+        this.radiusOld = this.radius
+        this.radius = 25 + (this.intensity * 0.002)
+        this.deltarad = this.radius - this.radiusOld
 
         this.ctx.fillStyle = 'rgb(255, 255, 255)'
         this.ctx.beginPath()
-        this.ctx.arc(centerX, centerY, radius + 2, 0, Math.PI * 2, false)
+        this.ctx.arc(this.centerX, this.centerY, this.radius + 2, 0, Math.PI * 2, false)
         this.ctx.fill()
 
         // shockwave effect
-        shockwave += 60
+        this.shockwave += 60
 
         this.ctx.lineWidth = 15
         this.ctx.strokeStyle = 'rgb(255, 255, 255)'
         this.ctx.beginPath()
-        this.ctx.arc(centerX, centerY, shockwave + radius, 0, Math.PI * 2, false)
+        this.ctx.arc(this.centerX, this.centerY, this.shockwave + this.radius, 0, Math.PI * 2, false)
         this.ctx.stroke()
 
-        if (deltarad > 15) {
-          shockwave = 0
+        if (this.deltarad > 15) {
+          this.shockwave = 0
           this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
           this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-          rot = rot + 0.4
+          this.rot = this.rot + 0.4
         }
 
         return window.requestAnimationFrame(this.frameLooper)

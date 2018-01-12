@@ -1,6 +1,6 @@
 const state = {
   current: 'init',
-  modifier: null
+  modifier: 'white'
 }
 
 const mutations = {

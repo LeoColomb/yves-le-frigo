@@ -54,7 +54,7 @@
   }
 </script>
 
-<style>
+<style scoped>
   #wrapper {
     height: 100vh;
     padding: 3em 3em;
@@ -78,6 +78,8 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    max-height: 100%;
+    overflow: auto;
   }
 
   main > button {

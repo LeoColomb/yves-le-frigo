@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <video id="video-element" autoplay="autoplay">
+    <video id="video-element" autoplay="autoplay" :loop="this.modifier === 'battery'">
       <source type="video/mp4" :src="`static/features/video/${this.modifier}.mp4`"/>
     </video>
   </div>
@@ -22,6 +22,9 @@
     },
 
     mounted: function () {
+      if (this.modifier === 'battery') {
+        document.getElementById('video-element').loop = true
+      }
       this.watcher = this.$store.watch(
         () => this.getModifierState,
         () => { document.getElementById('video-element').load() }

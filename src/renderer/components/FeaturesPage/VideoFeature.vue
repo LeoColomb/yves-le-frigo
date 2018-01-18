@@ -22,12 +22,13 @@
     },
 
     mounted: function () {
-      if (this.modifier === 'battery') {
-        document.getElementById('video-element').loop = true
-      }
       this.watcher = this.$store.watch(
         () => this.getModifierState,
-        () => { document.getElementById('video-element').load() }
+        () => {
+          const el = document.getElementById('video-element')
+          el.loop = (this.modifier === 'battery' || this.modifier === 'loader')
+          el.load()
+        }
       )
     },
 
@@ -50,5 +51,4 @@
   .cont video {
     max-height: 100vh;
   }
-
 </style>

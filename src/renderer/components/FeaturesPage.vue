@@ -34,14 +34,15 @@
 
 <style scoped>
   .hallo {
-    --color-r: 100;
+    --color-r: 0;
     --color-g: 0;
-    --color-b: 255;
+    --color-b: 0;
 
     background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0);
     background-image: radial-gradient(circle, transparent 2%, black 35%);
     animation: 4s ease-in-out alternate infinite breath;
     transition: background-color 2s ease-in-out;
+    border: none;
   }
 
   .hallo.black {

@@ -120,6 +120,11 @@
         this.reactY = 0
         this.intensity = 0
 
+        let factor = 1
+        if (this.modifier === 'douce' || this.modifier === 'peur') {
+          factor = 0.8
+        }
+
         this.analyser.getByteFrequencyData(this.fbcArray)
 
         for (let i = 0; i < this.bars; i++) {
@@ -128,11 +133,12 @@
           this.barX = this.centerX
           this.barY = this.centerY
 
-          this.barH = Math.min(99999, Math.max((this.fbcArray[i] * 2.5 - 200), 0))
+          let imp = this.modifier === 'peur' ? 3.5 : 2.5
+          this.barH = Math.min(99999, Math.max((this.fbcArray[i] * imp - 200), 0))
           this.barW = this.barH * 0.02
 
-          this.barXTerm = this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH)
-          this.barYTerm = this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH)
+          this.barXTerm = (this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH)) * factor
+          this.barYTerm = (this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH)) * factor
 
           // this.ctx.save()
 
@@ -149,11 +155,15 @@
           this.intensity += this.barH
         }
 
-        this.centerX = this.canvas.width / 2 - (this.reactX * 0.007)
-        this.centerY = this.canvas.height / 2 - (this.reactY * 0.007)
+        this.centerX = this.canvas.width / 2
+        this.centerY = this.canvas.height / 2
+        if (this.modifier === 'file') {
+          this.centerX -= this.reactX * 0.007
+          this.centerY -= this.reactY * 0.007
+        }
 
         this.radiusOld = this.radius
-        this.radius = 25 + (this.intensity * 0.002)
+        this.radius = (25 + (this.intensity * 0.002)) * factor
         this.deltarad = this.radius - this.radiusOld
 
         this.ctx.fillStyle = 'rgb(255, 255, 255)'
@@ -161,20 +171,22 @@
         this.ctx.arc(this.centerX, this.centerY, this.radius + 2, 0, Math.PI * 2, false)
         this.ctx.fill()
 
-        // shockwave effect
-        this.shockwave += 60
+        if (this.modifier === 'file' || this.modifier === 'perso') {
+          // shockwave effect
+          this.shockwave += 60
 
-        this.ctx.lineWidth = 15
-        this.ctx.strokeStyle = 'rgb(255, 255, 255)'
-        this.ctx.beginPath()
-        this.ctx.arc(this.centerX, this.centerY, this.shockwave + this.radius, 0, Math.PI * 2, false)
-        this.ctx.stroke()
+          this.ctx.lineWidth = 10
+          this.ctx.strokeStyle = 'rgb(255, 255, 255)'
+          this.ctx.beginPath()
+          this.ctx.arc(this.centerX, this.centerY, this.shockwave + this.radius, 0, Math.PI * 2, false)
+          this.ctx.stroke()
 
-        if (this.deltarad > 15) {
-          this.shockwave = 0
-          this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
-          this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
-          this.rot = this.rot + 0.4
+          if (this.deltarad > 15) {
+            this.shockwave = 0
+            this.ctx.fillStyle = 'rgba(255, 255, 255, 0.7)'
+            this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
+            this.rot = this.rot + 0.4
+          }
         }
 
         return window.requestAnimationFrame(this.frameLooper)

@@ -21,7 +21,7 @@
       <feature-button feature="visu" modifier="crea" color="black" full-name="Création" disabled/>
 
       <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
-      <feature-button feature="video" modifier="gateau" color="black" full-name="Gâteau" disabled/>
+      <feature-button feature="video" modifier="birthday" color="black" full-name="Gâteau"/>
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
       <feature-button feature="video" modifier="produits" color="black" full-name="Produits"/>

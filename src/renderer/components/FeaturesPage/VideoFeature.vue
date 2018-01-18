@@ -50,5 +50,7 @@
 
   .cont video {
     max-height: 100vh;
+    height: 100vh;
+    width: 100%;
   }
 </style>

@@ -21,7 +21,39 @@
 
     computed: {
       ...mapState({
-        modifier: state => state.feature.modifier
+        modifier: state => state.feature.modifier,
+        localOptions: state => {
+          const opt = {
+            null: {
+              color: '40, 180, 215',
+              shockwave: false,
+              factor: 1.1,
+              moving: false,
+              file: false
+            },
+            peur: {
+              color: '207, 88, 90',
+              shockwave: true,
+              factor: 0.8
+            },
+            douce: {
+              factor: 0.8
+            },
+            perso: {
+              color: '249, 163, 0',
+              shockwave: true
+            },
+            file: {
+              shockwave: true,
+              moving: true,
+              file: '2.mp3'
+            },
+            chant: {
+              moving: true
+            }
+          }
+          return Object.assign(opt[null], opt[state.feature.modifier] || {})
+        }
       }),
       ...mapGetters([
         'getModifierState'
@@ -63,12 +95,11 @@
         this.context = new AudioContext()
         this.analyser = this.context.createAnalyser()
 
-        if (this.modifier) {
+        if (this.localOptions.file) {
           this.audio = new Audio()
           this.audio.loop = false
           this.audio.autoplay = true
-          // this.audio.src = `static/features/visu/${this.modifier}.mp3`
-          this.audio.src = `static/features/visu/2.mp3`
+          this.audio.src = `static/features/visu/${this.localOptions.file}`
           this.source = this.context.createMediaElementSource(this.audio)
         } else {
           try {
@@ -112,7 +143,7 @@
       frameLooper: function () {
         this.resizeCanvas()
 
-        this.ctx.fillStyle = `rgba(255, 255, 255, ${this.intensity * 0.0000125 - 0.4})`
+        this.ctx.fillStyle = `rgba(${this.localOptions.color}, ${this.intensity * 0.0000125 - 0.4})`
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
         this.rot = this.rot + this.intensity * 0.0000001
@@ -120,25 +151,23 @@
         this.reactY = 0
         this.intensity = 0
 
-        let factor = 1
-        if (this.modifier === 'douce' || this.modifier === 'peur') {
-          factor = 0.8
-        }
-
         this.analyser.getByteFrequencyData(this.fbcArray)
 
         for (let i = 0; i < this.bars; i++) {
+          if (this.modifier === 'emotion' && i % 2 === 0) {
+            continue
+          }
           this.rads = Math.PI * 2 / this.bars
 
           this.barX = this.centerX
           this.barY = this.centerY
 
-          let imp = this.modifier === 'peur' ? 3.5 : 2.5
+          let imp = this.modifier === 'peur' ? 4 : 3
           this.barH = Math.min(99999, Math.max((this.fbcArray[i] * imp - 200), 0))
           this.barW = this.barH * 0.02
 
-          this.barXTerm = (this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH)) * factor
-          this.barYTerm = (this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH)) * factor
+          this.barXTerm = (this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH))
+          this.barYTerm = (this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH))
 
           // this.ctx.save()
 
@@ -157,13 +186,13 @@
 
         this.centerX = this.canvas.width / 2
         this.centerY = this.canvas.height / 2
-        if (this.modifier === 'file') {
+        if (this.localOptions.moving) {
           this.centerX -= this.reactX * 0.007
           this.centerY -= this.reactY * 0.007
         }
 
         this.radiusOld = this.radius
-        this.radius = (25 + (this.intensity * 0.002)) * factor
+        this.radius = (25 + (this.intensity * 0.002)) * this.localOptions.factor
         this.deltarad = this.radius - this.radiusOld
 
         this.ctx.fillStyle = 'rgb(255, 255, 255)'
@@ -171,12 +200,12 @@
         this.ctx.arc(this.centerX, this.centerY, this.radius + 2, 0, Math.PI * 2, false)
         this.ctx.fill()
 
-        if (this.modifier === 'file' || this.modifier === 'perso') {
+        if (this.localOptions.shockwave) {
           // shockwave effect
           this.shockwave += 60
 
           this.ctx.lineWidth = 10
-          this.ctx.strokeStyle = 'rgb(255, 255, 255)'
+          this.ctx.strokeStyle = `rgb(${this.localOptions.color})`
           this.ctx.beginPath()
           this.ctx.arc(this.centerX, this.centerY, this.shockwave + this.radius, 0, Math.PI * 2, false)
           this.ctx.stroke()

@@ -1,6 +1,6 @@
 <template>
   <div class="cont">
-    <video id="video-element" autoplay="autoplay" :loop="this.modifier === 'battery'">
+    <video id="video-element" autoplay="autoplay" :loop="this.loop">
       <source type="video/mp4" :src="`static/features/video/${this.modifier}.mp4`"/>
     </video>
   </div>
@@ -14,7 +14,17 @@
 
     computed: {
       ...mapState({
-        modifier: state => state.feature.modifier
+        modifier: state => state.feature.modifier,
+        loop: state => {
+          const loop = [
+            'battery',
+            'cravate',
+            'veille',
+            'agitee',
+            'loader'
+          ].indexOf(state.feature.modifier) >= 0
+          return loop ? 'loop' : false
+        }
       }),
       ...mapGetters([
         'getModifierState'
@@ -26,7 +36,7 @@
         () => this.getModifierState,
         () => {
           const el = document.getElementById('video-element')
-          el.loop = (this.modifier === 'battery' || this.modifier === 'loader')
+          el.loop = this.loop
           el.load()
         }
       )

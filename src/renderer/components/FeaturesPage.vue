@@ -8,6 +8,7 @@
   import InitFeature from './FeaturesPage/InitFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
+  import VeilleFeature from './FeaturesPage/VeilleFeature'
   import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
   export default {
@@ -16,6 +17,7 @@
       InitFeature,
       VisuFeature,
       VideoFeature,
+      VeilleFeature,
       FullscreenFeature
     },
 

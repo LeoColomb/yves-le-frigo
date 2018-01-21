@@ -12,9 +12,9 @@
       <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
       <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
 
-      <feature-button feature="veille" modifier="" color="dark" full-name="Veille" disabled/>
-      <feature-button feature="veille" modifier="sortie" color="dark" full-name="Sortie de veille" disabled/>
-      <feature-button feature="veille" modifier="agitee" color="dark" full-name="Veille agitée" disabled/>
+      <feature-button feature="video" modifier="veille" color="dark" full-name="Veille"/>
+      <feature-button feature="video" modifier="sortie" color="dark" full-name="Sortie de veille"/>
+      <feature-button feature="video" modifier="agitee" color="dark" full-name="Veille agitée"/>
       <feature-button feature="veille" modifier="degivre" color="dark" full-name="Veille dégivrante" disabled/>
 
       <feature-button feature="visu" modifier="file" color="black" full-name="Lecture"/>

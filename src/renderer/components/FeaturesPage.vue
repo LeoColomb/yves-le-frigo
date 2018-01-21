@@ -8,7 +8,6 @@
   import InitFeature from './FeaturesPage/InitFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
-  import VeilleFeature from './FeaturesPage/VeilleFeature'
   import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
   export default {
@@ -17,7 +16,6 @@
       InitFeature,
       VisuFeature,
       VideoFeature,
-      VeilleFeature,
       FullscreenFeature
     },
 
@@ -29,6 +27,9 @@
     mounted: function () {
       this.$electron.ipcRenderer.on('send-feature', (event, feature) => {
         this.$store.commit('FEATURE_CHANGE', feature)
+      })
+      this.$electron.ipcRenderer.on('send-action', (event, action) => {
+        this.$store.commit('ACTION_CHANGE', action)
       })
     }
   }
@@ -61,15 +62,15 @@
     animation: none;
   }
 
-  .hallo.red {
-    --color-r: 255;
-    --color-g: 0;
-    --color-b: 0;
+  .hallo.peur {
+    --color-r: 207;
+    --color-g: 88;
+    --color-b: 90;
   }
 
   .hallo.perso {
-    --color-r: 255;
-    --color-g: 200;
+    --color-r: 249;
+    --color-g: 163;
     --color-b: 0;
   }
 

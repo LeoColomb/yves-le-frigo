@@ -21,7 +21,10 @@
       <feature-button feature="visu" modifier="crea" color="black" full-name="Création" disabled/>
 
       <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
+
       <feature-button feature="video" modifier="birthday" color="black" full-name="Gâteau"/>
+      <feature-button feature="video" modifier="souffle" color="black" full-name="Gâteau soufflé"/>
+
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
       <feature-button feature="video" modifier="produits" color="black" full-name="Produits"/>
@@ -31,17 +34,26 @@
       <feature-button feature="video" modifier="loader" color="dark" full-name="Chargement"/>
 
       <feature-button feature="init" modifier="black" color="black" full-name="Eteint"/>
-    </main>
+
+      <div class="buttons">
+        <modifier-button action="pause" color="primary" full-name="Pause"/>
+        <modifier-button action="play" color="info" full-name="Reprise"/>
+      </div>
+  </main>
   </div>
 </template>
 
 <script>
   import FeatureButton from './LandingPage/FeatureButton'
+  import ModifierButton from './LandingPage/ModifierButton'
 
   export default {
     name: 'landing-page',
 
-    components: { FeatureButton },
+    components: {
+      FeatureButton,
+      ModifierButton
+    },
 
     mounted: function () {
       const version = this.$electron.remote.app.getVersion()
@@ -82,10 +94,22 @@
     overflow: auto;
   }
 
-  main > button {
+  main > button,
+  .buttons {
     flex-grow: 1;
     min-width: 8em;
     margin-bottom: 1em;
     margin-right: 1em;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    margin-bottom: auto;
+  }
+
+  .buttons > button {
+    flex-grow: 1;
   }
 </style>

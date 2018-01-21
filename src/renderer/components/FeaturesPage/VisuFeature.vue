@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import { mapState, mapGetters } from 'vuex'
+  import { mapState } from 'vuex'
 
   /**
    * Canvas audio animation
@@ -25,39 +25,55 @@
         localOptions: state => {
           const opt = {
             null: {
-              color: '40, 180, 215',
+              color: {
+                r: 40,
+                g: 180,
+                b: 215
+              },
               shockwave: false,
               factor: 1.1,
               moving: false,
-              file: false
+              customLines: false,
+              lineFactor: null
             },
             peur: {
-              color: '207, 88, 90',
+              color: {
+                r: 207,
+                g: 88,
+                b: 90
+              },
               shockwave: true,
-              factor: 0.8
+              factor: 0.8,
+              customLines: true
             },
             douce: {
               factor: 0.8
             },
             perso: {
-              color: '249, 163, 0',
-              shockwave: true
+              color: {
+                r: 249,
+                g: 163,
+                b: 0
+              },
+              shockwave: true,
+              customLines: true
             },
             file: {
               shockwave: true,
-              moving: true,
-              file: '2.mp3'
+              moving: true
             },
             chant: {
               moving: true
+            },
+            emotion: {
+              factor: 3,
+              moving: true,
+              lineFactor: 3
             }
           }
           return Object.assign(opt[null], opt[state.feature.modifier] || {})
         }
-      }),
-      ...mapGetters([
-        'getModifierState'
-      ])
+      })
     },
 
     mounted: async function () {
@@ -65,18 +81,9 @@
       this.ctx = this.canvas.getContext('2d')
 
       await this.constructer()
-
-      this.watcher = this.$store.watch(
-        () => this.getModifierState,
-        () => {
-          this.destroyer()
-          this.constructer()
-        }
-      )
     },
 
     beforeDestroy: function () {
-      this.watcher()
       this.destroyer()
     },
 
@@ -95,24 +102,16 @@
         this.context = new AudioContext()
         this.analyser = this.context.createAnalyser()
 
-        if (this.localOptions.file) {
-          this.audio = new Audio()
-          this.audio.loop = false
-          this.audio.autoplay = true
-          this.audio.src = `static/features/visu/${this.localOptions.file}`
-          this.source = this.context.createMediaElementSource(this.audio)
-        } else {
-          try {
-            this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
-          } catch (e) {
-            this.resizeCanvas()
-            this.ctx.font = '35px sans-serif'
-            this.ctx.fillStyle = 'white'
-            this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
-            return
-          }
-          this.source = this.context.createMediaStreamSource(this.audio)
+        try {
+          this.audio = await navigator.mediaDevices.getUserMedia({audio: true, video: false})
+        } catch (e) {
+          this.resizeCanvas()
+          this.ctx.font = '35px sans-serif'
+          this.ctx.fillStyle = 'white'
+          this.ctx.fillText('Aucune entrée son détectée...', this.canvas.width / 3, this.canvas.height / 2)
+          return
         }
+        this.source = this.context.createMediaStreamSource(this.audio)
 
         // route audio playback
         this.source.connect(this.analyser)
@@ -127,12 +126,7 @@
         window.cancelAnimationFrame(this.frameRequestId)
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.context.close()
-        if (this.audio.src) {
-          this.audio.pause()
-          this.audio.src = null
-        } else {
-          this.audio.getTracks().forEach(stream => stream.stop())
-        }
+        this.audio.getTracks().forEach(stream => stream.stop())
       },
 
       resizeCanvas: function () {
@@ -143,7 +137,7 @@
       frameLooper: function () {
         this.resizeCanvas()
 
-        this.ctx.fillStyle = `rgba(${this.localOptions.color}, ${this.intensity * 0.0000125 - 0.4})`
+        this.ctx.fillStyle = `rgba(${this.localOptions.color.r}, ${this.localOptions.color.g}, ${this.localOptions.color.b}, ${this.intensity * 0.0000125 - 0.4})`
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height)
 
         this.rot = this.rot + this.intensity * 0.0000001
@@ -154,7 +148,7 @@
         this.analyser.getByteFrequencyData(this.fbcArray)
 
         for (let i = 0; i < this.bars; i++) {
-          if (this.modifier === 'emotion' && i % 2 === 0) {
+          if (this.localOptions.lineFactor && (i % this.localOptions.lineFactor) - this.localOptions.lineFactor < -1) {
             continue
           }
           this.rads = Math.PI * 2 / this.bars
@@ -171,7 +165,17 @@
 
           // this.ctx.save()
 
-          this.ctx.strokeStyle = `rgb(${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()})`
+          if (this.localOptions.customLines) {
+            this.ctx.strokeStyle = 'rgb(' +
+              (Math.round(this.fbcArray[i] + (this.fbcArray[i] * this.localOptions.color.r / 256))).toString() +
+              ',' +
+              (Math.round(this.fbcArray[i] + (this.fbcArray[i] * this.localOptions.color.g / 256))).toString() +
+              ',' +
+              (Math.round(this.fbcArray[i] + (this.fbcArray[i] * this.localOptions.color.b / 256))).toString() +
+              ')'
+          } else {
+            this.ctx.strokeStyle = `rgb(${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()}, ${(this.fbcArray[i]).toString()})`
+          }
           this.ctx.lineWidth = this.barW
           this.ctx.beginPath()
           this.ctx.moveTo(this.barX, this.barY)
@@ -205,7 +209,7 @@
           this.shockwave += 60
 
           this.ctx.lineWidth = 10
-          this.ctx.strokeStyle = `rgb(${this.localOptions.color})`
+          this.ctx.strokeStyle = `rgb(${this.localOptions.color.r}, ${this.localOptions.color.g}, ${this.localOptions.color.b})`
           this.ctx.beginPath()
           this.ctx.arc(this.centerX, this.centerY, this.shockwave + this.radius, 0, Math.PI * 2, false)
           this.ctx.stroke()

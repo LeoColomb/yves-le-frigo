@@ -15,19 +15,22 @@
     computed: {
       ...mapState({
         modifier: state => state.feature.modifier,
+        action: state => state.feature.action,
         loop: state => {
           const loop = [
             'battery',
             'cravate',
             'veille',
             'agitee',
+            'birthday',
             'loader'
           ].indexOf(state.feature.modifier) >= 0
           return loop ? 'loop' : false
         }
       }),
       ...mapGetters([
-        'getModifierState'
+        'getModifierState',
+        'getActionState'
       ])
     },
 
@@ -40,10 +43,23 @@
           el.load()
         }
       )
+
+      this.actionWatcher = this.$store.watch(
+        () => this.getActionState,
+        value => {
+          const el = document.getElementById('video-element')
+          if (value === 'pause') {
+            el.pause()
+          } else {
+            el.play()
+          }
+        }
+      )
     },
 
     beforeDestroy: function () {
       this.watcher()
+      this.actionWatcher()
     }
   }
 </script>

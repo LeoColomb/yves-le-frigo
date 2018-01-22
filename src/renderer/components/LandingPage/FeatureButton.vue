@@ -5,6 +5,7 @@
     <span>
       <img :src="imageUrl">
     </span>
+    <span class="number"></span>
     {{ fullName }}
   </button>
 </template>
@@ -45,6 +46,17 @@
           feature: this.feature,
           modifier: this.modifier
         })
+        if (this.modifier === 'crea') {
+          const el = this.$el.querySelector('.number')
+          el.innerText = el.innerText + '*'
+          if (!this.$el.classList.contains('crea-upped')) {
+            this.$el.classList.add('crea-upped')
+          }
+        } else {
+          const el = document.getElementsByClassName('crea-upped')[0]
+          el.querySelector('.number').innerText = ''
+          el.classList.remove('crea-upped')
+        }
       }
     }
   }
@@ -76,5 +88,15 @@
   button:disabled span,
   button:disabled img {
     cursor: not-allowed;
+  }
+
+  .number {
+    display: none;
+    background: #000;
+    margin: auto;
+  }
+
+  .crea-upped .number {
+    display: inline-flex;
   }
 </style>

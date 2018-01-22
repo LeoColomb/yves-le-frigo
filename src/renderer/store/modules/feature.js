@@ -8,7 +8,7 @@ const mutations = {
   FEATURE_CHANGE (state, feature) {
     state.current = feature.feature
     state.modifier = feature.modifier
-    state.action = 'play'
+    state.action = state.modifier === 'crea' ? (isNaN(parseFloat(state.action)) ? 1 : ++state.action) : feature.action
   },
   ACTION_CHANGE (state, action) {
     state.action = action

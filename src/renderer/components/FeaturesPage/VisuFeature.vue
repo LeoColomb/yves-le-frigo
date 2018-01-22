@@ -22,6 +22,7 @@
     computed: {
       ...mapState({
         modifier: state => state.feature.modifier,
+        action: state => state.feature.action,
         localOptions: state => {
           const opt = {
             null: {
@@ -34,7 +35,8 @@
               factor: 1.1,
               moving: false,
               customLines: false,
-              lineFactor: null
+              lineFactor: null,
+              divider: 1
             },
             peur: {
               color: {
@@ -69,6 +71,9 @@
               factor: 3,
               moving: true,
               lineFactor: 3
+            },
+            crea: {
+              divider: 4
             }
           }
           return Object.assign(opt[null], opt[state.feature.modifier] || {})
@@ -148,6 +153,9 @@
         this.analyser.getByteFrequencyData(this.fbcArray)
 
         for (let i = 0; i < this.bars; i++) {
+          if (i > (this.bars / this.localOptions.divider) * (isNaN(this.action) ? 1 : this.action)) {
+            break
+          }
           if (this.localOptions.lineFactor && (i % this.localOptions.lineFactor) - this.localOptions.lineFactor < -1) {
             continue
           }
@@ -158,7 +166,7 @@
 
           let imp = this.modifier === 'peur' ? 4 : 3
           this.barH = Math.min(99999, Math.max((this.fbcArray[i] * imp - 200), 0))
-          this.barW = this.barH * 0.02
+          this.barW = this.barH * 0.02 * (this.localOptions.lineFactor ? this.localOptions.lineFactor : 1)
 
           this.barXTerm = (this.centerX + Math.cos(this.rads * i + this.rot) * (this.radius + this.barH))
           this.barYTerm = (this.centerY + Math.sin(this.rads * i + this.rot) * (this.radius + this.barH))

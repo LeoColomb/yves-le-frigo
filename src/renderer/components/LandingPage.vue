@@ -15,10 +15,10 @@
       <feature-button feature="video" modifier="veille" color="dark" full-name="Veille"/>
       <feature-button feature="video" modifier="sortie" color="dark" full-name="Sortie de veille"/>
       <feature-button feature="video" modifier="agitee" color="dark" full-name="Veille agitée"/>
-      <feature-button feature="veille" modifier="degivre" color="dark" full-name="Veille dégivrante" disabled/>
+      <feature-button feature="video" modifier="degivre" color="dark" full-name="Veille dégivrante"/>
 
       <feature-button feature="visu" modifier="file" color="black" full-name="Lecture"/>
-      <feature-button feature="visu" modifier="crea" color="black" full-name="Création" disabled/>
+      <feature-button feature="visu" modifier="crea" color="black" full-name="Création"/>
 
       <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
 

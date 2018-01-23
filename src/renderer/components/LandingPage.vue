@@ -22,6 +22,7 @@
 
       <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
 
+      <feature-button feature="image" modifier="" color="black" full-name="Cadeau"/>
       <feature-button feature="video" modifier="birthday" color="black" full-name="Gâteau"/>
 
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>

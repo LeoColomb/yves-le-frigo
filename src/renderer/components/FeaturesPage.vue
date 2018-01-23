@@ -8,6 +8,7 @@
   import InitFeature from './FeaturesPage/InitFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
+  import ImageFeature from './FeaturesPage/ImageFeature'
   import VeilleFeature from './FeaturesPage/VeilleFeature'
   import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
@@ -17,6 +18,7 @@
       InitFeature,
       VisuFeature,
       VideoFeature,
+      ImageFeature,
       FullscreenFeature,
       VeilleFeature
     },

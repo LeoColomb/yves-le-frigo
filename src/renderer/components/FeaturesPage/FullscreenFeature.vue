@@ -1,5 +1,5 @@
 <template>
-  <div class="cont">
+<div class="cont">
     <video id="video-element" autoplay="autoplay" loop="loop">
       <source :src="`static/features/video/${this.modifier}.webm`"/>
     </video>

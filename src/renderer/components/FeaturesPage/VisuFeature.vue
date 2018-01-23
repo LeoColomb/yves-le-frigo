@@ -153,7 +153,7 @@
         this.analyser.getByteFrequencyData(this.fbcArray)
 
         for (let i = 0; i < this.bars; i++) {
-          if (i > (this.bars / this.localOptions.divider) * (isNaN(this.action) ? 1 : this.action)) {
+          if (i > (this.bars / this.localOptions.divider) * this.action) {
             break
           }
           if (this.localOptions.lineFactor && (i % this.localOptions.lineFactor) - this.localOptions.lineFactor < -1) {

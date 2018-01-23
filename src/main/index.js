@@ -1,6 +1,7 @@
 'use strict'
 
 import { app, screen, BrowserWindow } from 'electron'
+import electronLocalshortcut from 'electron-localshortcut'
 
 /**
  * Set `__static` path to static files in production
@@ -38,9 +39,9 @@ function createWindow () {
   remoteWindow.loadURL(`${winURL}#/features`)
 
   mainWindow = new BrowserWindow({
-    height: 700,
+    height: 650,
     useContentSize: true,
-    width: 1210,
+    width: 1100,
     frame: true,
     modal: true,
     minimizable: false,
@@ -54,6 +55,14 @@ function createWindow () {
     mainWindow = null
     remoteWindow.close()
     remoteWindow = null
+  })
+
+  electronLocalshortcut.register(mainWindow, 'F', () => {
+    remoteWindow.webContents.send('send-action', 2)
+  })
+
+  electronLocalshortcut.register(mainWindow, 'S', () => {
+    remoteWindow.webContents.send('send-action', 3)
   })
 }
 

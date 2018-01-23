@@ -1,17 +1,28 @@
 const state = {
   current: 'init',
   modifier: 'white',
-  action: 'play'
+  action: 1
 }
 
 const mutations = {
   FEATURE_CHANGE (state, feature) {
     state.current = feature.feature
     state.modifier = feature.modifier
-    state.action = state.modifier === 'crea' ? (isNaN(parseFloat(state.action)) ? 1 : ++state.action) : feature.action
+    state.action = state.modifier === 'crea' ? state.action + 1 : 1
   },
   ACTION_CHANGE (state, action) {
-    state.action = action
+    switch (action) {
+      case 2:
+        state.action = (state.action + 1) % 2
+        break
+      case 3:
+        state.current = 'init'
+        state.modifier = 'black'
+        break
+      default:
+        state.action = action
+        break
+    }
   }
 }
 

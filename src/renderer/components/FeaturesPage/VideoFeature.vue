@@ -48,7 +48,7 @@
         () => this.getActionState,
         value => {
           const el = document.getElementById('video-element')
-          if (value === 'pause') {
+          if (value === 0) {
             el.pause()
           } else {
             el.play()

@@ -2,7 +2,7 @@
   <button
     :class="`button is-medium is-${color}`"
     @click="open">
-    {{ fullName }}
+    <p>{{ fullName }} <small class="is-size-7">({{ shortkey }})</small></p>
   </button>
 </template>
 
@@ -18,6 +18,10 @@
 
     props: {
       action: {
+        type: Number,
+        required: true
+      },
+      shortkey: {
         type: String,
         required: true
       },

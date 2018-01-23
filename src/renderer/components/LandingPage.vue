@@ -23,7 +23,6 @@
       <feature-button feature="video" modifier="portraits" color="black" full-name="Choix de voix"/>
 
       <feature-button feature="video" modifier="birthday" color="black" full-name="Gâteau"/>
-      <feature-button feature="video" modifier="souffle" color="black" full-name="Gâteau soufflé"/>
 
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
@@ -33,11 +32,12 @@
       <feature-button feature="video" modifier="battery" color="dark" full-name="Batterie faible"/>
       <feature-button feature="video" modifier="loader" color="dark" full-name="Chargement"/>
 
-      <feature-button feature="init" modifier="black" color="black" full-name="Eteint"/>
-
-      <div class="buttons">
-        <modifier-button action="pause" color="primary" full-name="Pause"/>
-        <modifier-button action="play" color="info" full-name="Reprise"/>
+      <div class="element">
+        <div class="buttons has-addons">
+          <modifier-button :action="0" shortkey="F" color="primary" full-name="Pause"/>
+          <modifier-button :action="1" shortkey="F" color="info" full-name="Reprise"/>
+        </div>
+        <modifier-button :action="3" shortkey="S" color="danger" full-name="Eteint"/>
       </div>
   </main>
   </div>
@@ -69,7 +69,7 @@
 <style scoped>
   #wrapper {
     height: 100vh;
-    padding: 3em 3em;
+    padding: 1em 3em;
     width: 100vw;
     background: white;
   }
@@ -78,7 +78,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    margin-bottom: 12px;
     padding-right: 1em;
   }
 
@@ -95,21 +95,20 @@
   }
 
   main > button,
-  .buttons {
+  .element {
     flex-grow: 1;
-    min-width: 8em;
-    margin-bottom: 1em;
-    margin-right: 1em;
+    min-width: 6em;
+    margin-bottom: 0.8em;
+    margin-right: 0.8em;
   }
 
-  .buttons {
+  .element {
     display: flex;
     flex-direction: column;
     height: auto;
-    margin-bottom: auto;
   }
 
-  .buttons > button {
-    flex-grow: 1;
+  .buttons {
+    align-self: center;
   }
 </style>

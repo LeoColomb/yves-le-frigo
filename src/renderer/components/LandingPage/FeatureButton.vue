@@ -54,8 +54,10 @@
           }
         } else {
           const el = document.getElementsByClassName('crea-upped')[0]
-          el.querySelector('.number').innerText = ''
-          el.classList.remove('crea-upped')
+          if (el) {
+            el.querySelector('.number').innerText = ''
+            el.classList.remove('crea-upped')
+          }
         }
       }
     }

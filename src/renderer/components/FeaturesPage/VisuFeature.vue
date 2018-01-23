@@ -36,7 +36,8 @@
               moving: false,
               customLines: false,
               lineFactor: null,
-              divider: 1
+              divider: 1,
+              halo: true
             },
             peur: {
               color: {
@@ -88,13 +89,8 @@
       this.canvas = document.getElementById('visualizer_render')
       this.ctx = this.canvas.getContext('2d')
 
-      this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
-      this.watcher = this.$store.watch(
-        () => this.getModifierState,
-        () => {
-          this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
-        }
-      )
+      this.halo()
+      this.watcher = this.$store.watch(() => this.getModifierState, this.halo)
 
       await this.constructer()
     },
@@ -144,6 +140,12 @@
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height)
         this.context.close()
         this.audio.getTracks().forEach(stream => stream.stop())
+      },
+
+      halo: function () {
+        if (this.localOptions.halo) {
+          this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
+        }
       },
 
       resizeCanvas: function () {

@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
+  import { mapState, mapGetters } from 'vuex'
 
   /**
    * Canvas audio animation
@@ -78,17 +78,29 @@
           }
           return Object.assign(opt[null], opt[state.feature.modifier] || {})
         }
-      })
+      }),
+      ...mapGetters([
+        'getModifierState'
+      ])
     },
 
     mounted: async function () {
       this.canvas = document.getElementById('visualizer_render')
       this.ctx = this.canvas.getContext('2d')
 
+      this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
+      this.watcher = this.$store.watch(
+        () => this.getModifierState,
+        () => {
+          this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
+        }
+      )
+
       await this.constructer()
     },
 
     beforeDestroy: function () {
+      this.watcher()
       this.destroyer()
     },
 
@@ -238,6 +250,22 @@
 
 <style scoped>
   canvas {
-    background: transparent;
+    --color-r: 0;
+    --color-g: 0;
+    --color-b: 0;
+
+    background-image: radial-gradient(circle, transparent 2%, black 35%);
+    animation: 4s ease-in-out alternate infinite breath;
+    border: none;
+  }
+
+  @keyframes breath {
+    from {
+      background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0.2);
+    }
+
+    to {
+      background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0.5);
+    }
   }
 </style>

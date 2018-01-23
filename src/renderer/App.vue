@@ -34,5 +34,6 @@
     width: 100vw;
     overflow: hidden;
     background: black;
+    border: none;
   }
 </style>

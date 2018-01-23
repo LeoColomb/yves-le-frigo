@@ -1,5 +1,5 @@
 <template>
-  <component :is="feature" :class="`hallo ${modifier}`"/>
+  <component :is="feature" class="compo"/>
 </template>
 
 <script>
@@ -24,8 +24,7 @@
     },
 
     computed: mapState({
-      feature: state => `${state.feature.current}-feature`,
-      modifier: state => state.feature.modifier
+      feature: state => `${state.feature.current}-feature`
     }),
 
     mounted: function () {
@@ -40,51 +39,7 @@
 </script>
 
 <style scoped>
-  .hallo {
-    --color-r: 0;
-    --color-g: 0;
-    --color-b: 0;
-
-    background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0);
-    background-image: radial-gradient(circle, transparent 2%, black 35%);
-    animation: 4s ease-in-out alternate infinite breath;
-    transition: background-color 2s ease-in-out;
+  .compo {
     border: none;
-  }
-
-  .hallo.black {
-    --color-r: 0;
-    --color-g: 0;
-    --color-b: 0;
-  }
-
-  .hallo.white {
-    --color-r: 255;
-    --color-g: 255;
-    --color-b: 255;
-
-    animation: none;
-  }
-
-  .hallo.peur {
-    --color-r: 207;
-    --color-g: 88;
-    --color-b: 90;
-  }
-
-  .hallo.perso {
-    --color-r: 249;
-    --color-g: 163;
-    --color-b: 0;
-  }
-
-  @keyframes breath {
-    from {
-      background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0.2);
-    }
-
-    to {
-      background-color: rgba(var(--color-r), var(--color-g), var(--color-b), 0.5);
-    }
   }
 </style>

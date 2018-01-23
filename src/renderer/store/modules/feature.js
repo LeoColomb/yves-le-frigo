@@ -6,9 +6,9 @@ const state = {
 
 const mutations = {
   FEATURE_CHANGE (state, feature) {
+    state.action = state.modifier === 'crea' ? state.action + 1 : 1
     state.current = feature.feature
     state.modifier = feature.modifier
-    state.action = state.modifier === 'crea' ? state.action + 1 : 1
   },
   ACTION_CHANGE (state, action) {
     switch (action) {

@@ -22,7 +22,6 @@
             'cravate',
             'veille',
             'agitee',
-            'birthday',
             'loader'
           ].indexOf(state.feature.modifier) >= 0
           return loop ? 'loop' : false

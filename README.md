@@ -2,7 +2,7 @@
 
 > Yves le frigo, le film et l'interface
 
-[![Build Status](https://travis-ci.com/LeoColomb/yves-le-frigo.svg?token=2zEzd31MyLpyoYEtPyFg&branch=master)](https://travis-ci.com/LeoColomb/yves-le-frigo)
+[![Build Status](https://travis-ci.org/LeoColomb/yves-le-frigo.svg?branch=master)](https://travis-ci.org/LeoColomb/yves-le-frigo)
 
 #### Build Setup
 

@@ -11,6 +11,7 @@
       <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>
       <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
       <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
+      <feature-button feature="visu" modifier="vince" color="black" full-name="Vince"/>
 
       <feature-button feature="veille" modifier="" color="dark" full-name="Veille"/>
       <feature-button feature="veille" modifier="sortie" color="dark" full-name="Sortie de veille"/>

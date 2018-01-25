@@ -75,6 +75,10 @@
             },
             crea: {
               divider: 4
+            },
+            vince: {
+              factor: 3,
+              lineFactor: 10
             }
           }
           return Object.assign(opt[null], opt[state.feature.modifier] || {})
@@ -222,9 +226,22 @@
         this.deltarad = this.radius - this.radiusOld
 
         this.ctx.fillStyle = 'rgb(255, 255, 255)'
-        this.ctx.beginPath()
-        this.ctx.arc(this.centerX, this.centerY, this.radius + 2, 0, Math.PI * 2, false)
-        this.ctx.fill()
+        if (this.modifier === 'vince') {
+          let path = new Path2D('M490.5,297.2c0.4,70.7-49.6,131.7-111.6,160.7c-81,38-180,50-260.8,6.6c-14.6-8.5-28.2-19.3-40.2-32.6\n' +
+            ' c-78-86-32-224,25.8-312.5c8.3-11.6,17.5-22.5,27.6-32.6c10.2-10.1,21.4-19.3,33.6-27.5c13.1-8,27.7-14.6,44-19.3\n' +
+            ' c13-3.8,26.1-5.3,39-5.1c12.9,0.2,25.7,2.3,38.2,5.7c100.8,32.3,173.8,128.3,202.2,227.6C489.8,277.8,490.5,287.4,490.5,297.2z')
+          this.ctx.save()
+          this.ctx.translate(this.canvas.width / 2, this.canvas.height / 2)
+          const reductor = 30 / this.radius
+          this.ctx.translate(-527 * reductor / 2, -527 * reductor / 2)
+          this.ctx.scale(reductor, reductor)
+          this.ctx.fill(path)
+          this.ctx.restore()
+        } else {
+          this.ctx.beginPath()
+          this.ctx.arc(this.centerX, this.centerY, this.radius + 2, 0, Math.PI * 2, false)
+          this.ctx.fill()
+        }
 
         if (this.localOptions.shockwave) {
           // shockwave effect

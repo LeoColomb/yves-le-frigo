@@ -9,7 +9,6 @@
       <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
       <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce"/>
       <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>
-      <feature-button feature="visu" modifier="emotion" color="success" full-name="Voix émotion"/>
       <feature-button feature="visu" modifier="chant" color="link" full-name="Voix chantée"/>
       <feature-button feature="visu" modifier="vince" color="black" full-name="Vince"/>
 

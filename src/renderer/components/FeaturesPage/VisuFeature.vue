@@ -68,11 +68,6 @@
             chant: {
               moving: true
             },
-            emotion: {
-              factor: 3,
-              moving: true,
-              lineFactor: 3
-            },
             crea: {
               divider: 4
             },

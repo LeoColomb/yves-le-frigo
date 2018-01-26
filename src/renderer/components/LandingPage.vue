@@ -29,7 +29,6 @@
       <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
       <feature-button feature="video" modifier="produits" color="black" full-name="Produits"/>
-      <feature-button feature="video" modifier="camera" color="black" full-name="Caméra"/>
       <feature-button feature="video" modifier="echecs" color="black" full-name="Jeu d'échecs"/>
       <feature-button feature="video" modifier="battery" color="dark" full-name="Batterie faible"/>
       <feature-button feature="video" modifier="loader" color="dark" full-name="Chargement"/>

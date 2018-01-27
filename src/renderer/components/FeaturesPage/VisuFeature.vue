@@ -1,5 +1,8 @@
 <template>
-  <canvas id="visualizer_render"></canvas>
+  <div>
+    <canvas id="visualizer_render"></canvas>
+    <video id="video-element" autoplay="autoplay"></video>
+  </div>
 </template>
 
 <script>
@@ -150,6 +153,12 @@
         if (this.localOptions.halo) {
           this.canvas.style.cssText = `--color-r: ${this.localOptions.color.r}; --color-g: ${this.localOptions.color.g}; --color-b: ${this.localOptions.color.b}`
         }
+        const video = document.getElementById('video-element')
+        if (this.modifier === 'nu') {
+          video.src = 'static/features/video/doria.webm'
+        } else {
+          video.src = null
+        }
       },
 
       resizeCanvas: function () {
@@ -276,6 +285,12 @@
     background-image: radial-gradient(circle, transparent 2%, black 35%);
     animation: 4s ease-in-out alternate infinite breath;
     border: none;
+  }
+
+  #video-element {
+    position: absolute;
+    top: 0;
+    left: 0;
   }
 
   @keyframes breath {

@@ -10,7 +10,6 @@
   import VideoFeature from './FeaturesPage/VideoFeature'
   import ImageFeature from './FeaturesPage/ImageFeature'
   import VeilleFeature from './FeaturesPage/VeilleFeature'
-  import FullscreenFeature from './FeaturesPage/FullscreenFeature'
 
   export default {
     name: 'features-page',
@@ -19,7 +18,6 @@
       VisuFeature,
       VideoFeature,
       ImageFeature,
-      FullscreenFeature,
       VeilleFeature
     },
 

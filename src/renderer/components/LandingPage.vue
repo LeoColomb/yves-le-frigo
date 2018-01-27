@@ -26,7 +26,7 @@
       <feature-button feature="image" modifier="gift" color="black" full-name="Cadeau"/>
       <feature-button feature="video" modifier="birthday" color="black" full-name="Gâteau"/>
 
-      <feature-button feature="fullscreen" modifier="nu" color="black" full-name="Femme en 3D"/>
+      <feature-button feature="visu" modifier="nu" color="black" full-name="Femme en 3D"/>
       <feature-button feature="video" modifier="cravate" color="black" full-name="Cravate"/>
       <feature-button feature="video" modifier="produits" color="black" full-name="Produits"/>
       <feature-button feature="video" modifier="echecs" color="black" full-name="Jeu d'échecs"/>

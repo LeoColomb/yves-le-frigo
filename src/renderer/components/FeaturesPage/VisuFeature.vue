@@ -1,7 +1,7 @@
 <template>
   <div>
     <canvas id="visualizer_render"></canvas>
-    <video id="video-element" autoplay="autoplay"></video>
+    <video id="video-element" autoplay loop></video>
   </div>
 </template>
 

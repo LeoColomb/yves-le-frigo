@@ -5,7 +5,7 @@
       <p id="ver" class="tag is-danger" style="display: none;"></p>
     </header>
     <main>
-      <feature-button feature="visu" modifier="" color="info" full-name="Voix normale"/>
+      <feature-button feature="visu" modifier="" shortkey="V" color="info" full-name="Voix normale"/>
       <feature-button feature="visu" modifier="peur" color="danger" full-name="Voix peur"/>
       <feature-button feature="visu" modifier="douce" color="primary" full-name="Voix douce"/>
       <feature-button feature="visu" modifier="perso" color="warning" full-name="Voix Julien Lepers"/>

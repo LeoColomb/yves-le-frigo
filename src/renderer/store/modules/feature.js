@@ -16,7 +16,7 @@ const mutations = {
         state.action = (state.action + 1) % 2
         break
       case 3:
-        state.current = 'init'
+        state.current = 'black'
         state.modifier = 'black'
         break
       default:

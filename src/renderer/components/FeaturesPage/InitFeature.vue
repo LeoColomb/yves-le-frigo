@@ -5,14 +5,8 @@
 </template>
 
 <script>
-  import { mapState } from 'vuex'
-
   export default {
-    name: 'init-feature',
-
-    computed: mapState({
-      modifier: state => state.feature.modifier
-    })
+    name: 'init-feature'
   }
 </script>
 

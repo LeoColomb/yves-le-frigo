@@ -6,6 +6,7 @@
   import { mapState } from 'vuex'
 
   import InitFeature from './FeaturesPage/InitFeature'
+  import BlackFeature from './FeaturesPage/BlackFeature'
   import VisuFeature from './FeaturesPage/VisuFeature'
   import VideoFeature from './FeaturesPage/VideoFeature'
   import ImageFeature from './FeaturesPage/ImageFeature'
@@ -15,6 +16,7 @@
     name: 'features-page',
     components: {
       InitFeature,
+      BlackFeature,
       VisuFeature,
       VideoFeature,
       ImageFeature,

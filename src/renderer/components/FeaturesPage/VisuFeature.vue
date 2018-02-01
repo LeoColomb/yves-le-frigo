@@ -139,7 +139,7 @@
 
         this.fbcArray = new Uint8Array(this.analyser.frequencyBinCount)
 
-        this.frameRequestId = this.frameLooper()
+        this.frameLooper()
       },
 
       destroyer: function () {
@@ -270,7 +270,7 @@
           }
         }
 
-        return window.requestAnimationFrame(this.frameLooper)
+        this.frameRequestId = window.requestAnimationFrame(this.frameLooper)
       }
     }
   }

@@ -57,7 +57,7 @@
     }
   },
   "dependencies": {
-    "buefy": "^0.6.2",
+    "buefy": "^0.6.3",
     "electron-localshortcut": "^3.1.0",
     "vue": "^2.5.13",
     "vue-electron": "^1.0.6",

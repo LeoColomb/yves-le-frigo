@@ -6,7 +6,7 @@
       <img :src="imageUrl">
     </span>
     <span class="number"></span>
-    {{ fullName }}
+    <p>{{ fullName }}<small class="is-size-7" v-if="shortkey"> ({{ shortkey }})</small></p>
   </button>
 </template>
 
@@ -26,6 +26,11 @@
         required: true
       },
       modifier: {
+        type: String,
+        required: false,
+        default: null
+      },
+      shortkey: {
         type: String,
         required: false,
         default: null

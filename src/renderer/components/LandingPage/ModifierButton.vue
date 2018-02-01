@@ -2,7 +2,7 @@
   <button
     :class="`button is-medium is-${color}`"
     @click="open">
-    <p>{{ fullName }} <small class="is-size-7">({{ shortkey }})</small></p>
+    <p>{{ fullName }}<small class="is-size-7"> ({{ shortkey }})</small></p>
   </button>
 </template>
 

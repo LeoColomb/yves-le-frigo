@@ -64,6 +64,13 @@ function createWindow () {
   electronLocalshortcut.register(mainWindow, 'S', () => {
     remoteWindow.webContents.send('send-action', 3)
   })
+
+  electronLocalshortcut.register(mainWindow, 'V', () => {
+    remoteWindow.webContents.send('send-feature', {
+      feature: 'visu',
+      modifier: ''
+    })
+  })
 }
 
 app.on('ready', createWindow)
